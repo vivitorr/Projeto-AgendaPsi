@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+body{
+    margin: 0px;
+    font-family: roboto,"Noto Sans Myanmar UI",arial,sans-serif;
+}
+
+.content{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box{
+    text-align: center;
+    background: #fff;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    padding: 50px 40px 70px;
+}
+
+.form{
+    display: grid;
+    gap: 40px;
+}
+
+/*_______________________TITULOS_______________________*/
+.cabeca{
+    gap: 10px;
+}
+
+h2{
+    font-size: 24px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-family: "Google Sans","Noto Sans Myanmar UI",arial,sans-serif;
+    font-weight: 700;
+}
+
+h3{
+    color: #732cd1;
+    font-size: 17px;
+    margin: 0;
+    font-family: "Google Sans","Noto Sans Myanmar UI",arial,sans-serif;
+    font-weight: 400;
+}
+/*_____________________________________________________*/
+
+input{
+    background-color: #00000000;
+    border-color: #00000018;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 350px;
+    height: 28px;
+    padding: 13px 15px;
+}
+
+/*_______________________BOTÕES_______________________*/
+.botoes{
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.btn{
+    font-family: "Google Sans",Roboto,Arial,sans-serif;
+    font-size: .875rem;
+    letter-spacing: .0107142857em;
+    font-weight: 500;
+    text-transform: none;
+}
+
+.btn.btn-cadastro{
+    background: transparent;
+    border:  none;
+    color: rgb(26 115 232);
+    padding: 10px 5px 10px 5px;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.btn.btn-entrar{
+    background: rgb(26 115 232);
+    border-radius: 4px;
+    border-color: transparent;
+    color: white;
+    padding: 10px 30px 10px 30px;
+    transition: 1s;
+}
+
+.btn.btn-entrar:hover{
+    background: white;
+    border-radius: 4px;
+    border-color: rgb(26 115 232);
+    color: rgb(26 115 232);
+    padding: 10px 30px 10px 30px;
+    transition: 1s;
+}
+/*____________________________________________________*/
+
+.message{
+    padding: 19px 60px;
+    position: fixed;
+    top: 150px;
+    background-color: #732cd1;
+    border-radius: 5px;
+    color: #fff;
+    animation: slide-in-right 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.message::before{
+    content: "";
+    position: absolute;
+    left: 0px;
+    bottom: 0;
+    width: 0;
+    height: 5px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: time 4s forwards;
+}
+
+@keyframes slide-in-right {
+    0%{
+        transform: translatex(1000px);
+        opacity: 0;
+    }
+    100%{
+        transform: translatex(0);
+        opacity: 1; 
+    }
+}
+
+@keyframes time{
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 100%;
+    }
+}
