@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Events
 import json
+from django.http import JsonResponse
 # Create your views here.
 
 
@@ -58,3 +59,18 @@ def home_psico(request):
 def sair(request):
     logout(request)
     return redirect('/')  
+
+
+def eventos_json(request):
+    eventos = Events.objects.all()
+    eventos_json = []
+    for evento in eventos:
+        evento_json = {
+            'id': evento.id,
+            'title': evento.title,
+            'start': evento.start.strftime('%Y-%m-%dT%H:%M:%S'),
+            'end': evento.end.strftime('%Y-%m-%dT%H:%M:%S'),
+            'descricao': evento.description,
+        }
+        eventos_json.append(evento_json)
+    return JsonResponse(eventos_json, safe=False)
