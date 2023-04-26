@@ -33,3 +33,19 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   calendar.render();
 });
+
+document.getElementById("adicionar-evento").addEventListener("click", function() {
+  document.getElementById("modal-criar-evento").style.display = "block";
+  
+  // aqui você pode adicionar o código para abrir o modal/formulário de criação de evento
+});
+
+document.getElementById("fechar-modal").addEventListener("click", function() {
+  document.getElementById("modal-criar-evento").style.display = "none";
+});
+
+document.getElementById("modal-criar-evento").addEventListener("click", function(event) {
+  if (event.target == document.getElementById("modal-criar-evento")) {
+    document.getElementById("modal-criar-evento").style.display = "none";
+  }
+});

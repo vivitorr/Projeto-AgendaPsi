@@ -27,8 +27,26 @@
                 <a href="/sair/"><button class="btn btn-sair"><img src="{% static 'img/sair.png' %}"></button></a>
             </div>
         </div>
-        <div id="calendar" class='calendar'></div>
+
+        <div id="calendar" class='calendar'>
+            <button id="adicionar-evento" class="botao-calendario"><i class="fas fa-plus"></i> Adicionar Evento</button>
+        </div>
         
+        
+        <div id="modal-criar-evento" class="modal">
+            <div class="modal-content">
+              <h2>Criar Evento</h2>
+              <form class="form" name="form-evento" id="formEvento" method="post" action="/criar_evento/">
+                {% csrf_token %}
+                <input type="text" id="title" name="title" placeholder="Titulo">
+                <input type="text" id="description" name="description" placeholder="Descrição">
+                <input type="datetime-local" id="inicio" name="inicio" placeholder="dd-MM-dd HH:mm:ss" size="16" ng-model="data.action.date"/>
+                <button class="btn btn-criar" id="criar-evento">Criar Evento</button>
+                <button id="fechar-modal">Fechar</button>
+              </form>
+            </div>
+        </div>
+          
         
     </div>
     <script src="{% static 'js/home/home_psico.js' %}"></script>  

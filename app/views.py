@@ -7,6 +7,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Events
 import json
 from django.http import JsonResponse
+from django.contrib import auth
+from datetime import datetime, timedelta
 # Create your views here.
 
 
@@ -60,7 +62,6 @@ def sair(request):
     logout(request)
     return redirect('/')  
 
-
 def eventos_json(request):
     eventos = Events.objects.all()
     eventos_json = []
@@ -74,3 +75,15 @@ def eventos_json(request):
         }
         eventos_json.append(evento_json)
     return JsonResponse(eventos_json, safe=False)
+
+
+def criar_evento(request):
+    criador=request.user
+    title = request.POST['title']
+    description = request.POST['description']
+    start = datetime.strptime(request.POST['inicio'], '%Y-%m-%dT%H:%M')
+    end = start + timedelta(hours=1)
+    end = end.strftime('%Y-%m-%d %H:%M:%S')
+    evento = Events(criador=criador, title=title, description=description, start=start, end = end)
+    evento.save()
+    return render(request, 'home\home_psico.html') 
