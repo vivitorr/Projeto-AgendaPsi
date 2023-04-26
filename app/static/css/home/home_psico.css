@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/*_______________________divs_______________________*/
+body{
+    margin: 0px;
+    font-family: roboto,"Noto Sans Myanmar UI",arial,sans-serif;
+}
+
+.home{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
+}
+
+.cabeca{
+    width: 100vw;
+    height: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+/*____________________________________________________*/
+
+/*_______________________titles_______________________*/
+h3{
+    color: #732cd1;
+    font-size: 24px;
+    margin: 0;
+    font-family: "Google Sans","Noto Sans Myanmar UI",arial,sans-serif;
+    font-weight: 600;
+}
+/*____________________________________________________*/
+
+/*_______________________BOTÕES_______________________*/
+.btns{
+    display: flex;
+    gap: 10px;
+}
+
+.btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 40px;
+    border-radius: 8px;
+    border: 2px solid #732cd1;
+    background-color: #ffffff;
+    transition: 1s;
+}
+
+.btn:hover{
+    border: 2px solid #000000;
+    background-color: #732cd1;
+    transition: 1s;
+}
+
+img{
+    width: 30px;
+}
+/*______________________________________________*/
+
+
+.calendar{
+    width: 80%;
+    margin: 30px auto;
+    height: 80vh;
+}

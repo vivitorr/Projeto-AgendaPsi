@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import permission_required, login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Events
+import json
 # Create your views here.
 
 
@@ -51,7 +53,7 @@ def home_cliente(request):
 @login_required(login_url='/')
 @permission_required('admin.psico', login_url='/')
 def home_psico(request):
-    return render(request, 'home/home_psico.html' )  
+    return render(request, 'home/home_psico.html')  
 
 def sair(request):
     logout(request)
