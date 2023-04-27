@@ -41,15 +41,15 @@
               <form class="form-evento" name="form-evento" id="formEvento" method="post" action="/criar_evento/">
                 {% csrf_token %}
                 <input type="text" id="title" name="title" placeholder="Titulo">
-                <label for="cliente">Cliente:</label>
-                <select name="cliente" id="cliente">
-                </select>
+                <div class="paci">
+                    <label for="cliente">Paciente</label>
+                    <select name="cliente" id="cliente">
+                    </select>
+                </div>
                 <input type="text" id="description" name="description" placeholder="Descrição">
                 <input type="datetime-local" id="inicio" name="inicio" placeholder="dd-MM-dd HH:mm:ss" size="16" ng-model="data.action.date"/>
-                <div class="botoes" >
-                    <button class="btn btn-fechar" id="fechar-modal">Cancelar</button>
-                    <button class="btn btn-criar" id="criar-evento">Adicionar</button>
-                </div>
+                <button class="btn btn-criar" id="criar-evento">Adicionar</button>
+                <button class="btn btn-fechar" id="fechar-modal">Cancelar</button>
               </form>
             </div>
         </div>

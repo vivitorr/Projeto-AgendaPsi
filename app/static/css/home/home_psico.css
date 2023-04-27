@@ -65,7 +65,7 @@ img{
 
 
 .calendar{
-    width: 55%;
+    width: 70%;
     
     height: 70vh;
 }
@@ -87,7 +87,7 @@ img{
     border: 1px solid #dadce0;
     border-radius: 8px;
     padding: 50px 40px 70px;
-    margin: 15% auto;
+    margin: 12% auto;
     width: 25%;
   }
 
@@ -107,13 +107,41 @@ input{
     padding: 13px 15px;
 }
 
-.botoes{
-    display: flex;
-    width: 100%;
-    flex-wrap: nowrap;
-    justify-content: space-between;
+.botao-calendario{
+    display: none;
 }
 
-.botao-calendario{
+.paci{
+    height: 28px;
+    padding: 13px 15px;
+    display: flex;
+    border: 2px solid #00000018;
+    border-radius: 4px;
+    align-items: center;
+    gap: 30px;
+    font-size: 16px;
+}
+
+select{
+    width: 250px;
+    height: 30px;
+    border-radius: 4px;
+}
+
+label {
+    color: #00000094;
+    font-size: 17px;
+    margin-top: 5px;
+    font-family: "Google Sans","Noto Sans Myanmar UI",arial,sans-serif;
+    font-weight: 400;
+}
+
+.btn.btn-criar{
+    height: 28px;
+    width: auto;
+    padding: 13px 15px;
+}
+
+.btn.btn-fechar{
     display: none;
 }

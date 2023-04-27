@@ -7,11 +7,17 @@ document.addEventListener('DOMContentLoaded', function() {
     timeZone: 'America/Sao_Paulo',
     locale: 'pt-br',
     selectable: true,
+    displayEventEnd: true,
 
     headerToolbar:{
       start: 'listWeek,dayGridMonth myCustomButton',
       center: 'title',
       end: 'prev today next'
+    },
+
+    eventTimeFormat: { // like '14:30:00'
+      hour: '2-digit',
+      minute: '2-digit',
     },
 
     customButtons: {

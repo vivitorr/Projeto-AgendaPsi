@@ -27,7 +27,7 @@ urlpatterns = [
     path('cadastrobanc/', cadastrobanc),
     path('loginbanc/', loginbanc),
     path('home_cliente/', home_cliente),
-    path('home_psico/', home_psico),
+    path('home_psico/', home_psico, name='home_psico'),
     path('sair/', sair),
     path('eventos.json', eventos_json, name='eventos_json'),
     path('criar_evento/', criar_evento),

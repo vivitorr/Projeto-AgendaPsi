@@ -64,6 +64,7 @@ def sair(request):
 
 def eventos_json(request):
     eventos = Events.objects.all()
+    eventos = eventos.filter(criador=request.user)
     eventos_json = []
     for evento in eventos:
         evento_json = {
@@ -96,7 +97,7 @@ def criar_evento(request):
     end = end.strftime('%Y-%m-%d %H:%M:%S')
     evento = Events(criador=criador, paciente=paciente, title=title, description=description, start=start, end = end)
     evento.save()
-    return render(request, 'home\home_psico.html') 
+    return redirect('home_psico')
 
 def get_clientes(request):
     clientes = User.objects.filter(user_permissions__codename='cliente')
