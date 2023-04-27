@@ -42,12 +42,12 @@
                 {% csrf_token %}
                 <input type="text" id="title" name="title" placeholder="Titulo">
                 <label for="cliente">Cliente:</label>
-                    <select name="cliente" id="cliente">
-                        <option value="disponivel">Disponivel</option>
-                        {% for cliente in clientes %}
-                            <option value="{{ cliente.id }}">{{ cliente.first_name }}</option>
-                        {% endfor %}
-                    </select>
+                <select name="cliente" id="cliente-select">
+                    <option value="disponivel">Disponivel</option>
+                    {% for cliente in clientes %}
+                        <option value="{{ cliente.id }}">{{ cliente.first_name }}</option>
+                    {% endfor %}
+                </select>
                 <input type="text" id="description" name="description" placeholder="Descrição">
                 <input type="datetime-local" id="inicio" name="inicio" placeholder="dd-MM-dd HH:mm:ss" size="16" ng-model="data.action.date"/>
                 <div class="botoes" >

@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LoginView, LogoutView
-from app.views import tela_login, tela_cadastro, loginbanc, cadastrobanc, home_cliente, home_psico, sair, eventos_json, criar_evento
+from app.views import tela_login, tela_cadastro, loginbanc, cadastrobanc, home_cliente, home_psico, sair, eventos_json, criar_evento, get_clientes
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,4 +31,5 @@ urlpatterns = [
     path('sair/', sair),
     path('eventos.json', eventos_json, name='eventos_json'),
     path('criar_evento/', criar_evento),
+    path('get_clientes/', get_clientes, name='get_clientes'),
 ]

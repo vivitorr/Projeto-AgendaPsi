@@ -56,9 +56,7 @@ def home_cliente(request):
 @login_required(login_url='/')
 @permission_required('admin.psico', login_url='/')
 def home_psico(request):
-    clientes = User.objects.filter(user_permissions__codename='cliente')
-    permissions = Permission.objects.filter(codename='cliente')
-    return render(request, 'home/home_psico.html', {'clientes': clientes, 'permissions': permissions})
+    return render(request, 'home/home_psico.html')
 
 def sair(request):
     logout(request)
@@ -92,3 +90,7 @@ def criar_evento(request):
     evento.save()
     return render(request, 'home\home_psico.html') 
 
+def get_clientes(request):
+    clientes = User.objects.filter(user_permissions__codename='cliente')
+    permissions = Permission.objects.filter(codename='cliente')
+    return ({'clientes': clientes, 'permissions': permissions})
