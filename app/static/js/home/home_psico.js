@@ -18,6 +18,18 @@ document.addEventListener('DOMContentLoaded', function() {
       myCustomButton: {
         text: 'Adicionar Horário',
         click: function() {
+          fetch('/get_clientes/')
+          .then(response => response.json())
+          .then(data => {
+              const select = document.getElementById('cliente');
+              select.innerHTML = '<option value=""selected>Disponível</option>';
+              data.clientes.forEach(cliente => {
+                  const option = document.createElement('option');
+                  option.text = cliente.first_name;
+                  option.value = cliente.id;
+                  select.add(option);
+              });
+          });
           document.getElementById("modal-criar-evento").style.display = "block";
         }
       }
@@ -44,18 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.getElementById("adicionar-evento").addEventListener("click", function() {
-  fetch('/get_clientes/')
-      .then(response => response.json())
-      .then(data => {
-          const select = document.getElementById('cliente-select');
-          select.innerHTML = '';
-          data.clientes.forEach(cliente => {
-              const option = document.createElement('option');
-              option.text = cliente.username;
-              option.value = cliente.id;
-              select.add(option);
-          });
-      });
   document.getElementById("modal-criar-evento").style.display = "block";
 });
 

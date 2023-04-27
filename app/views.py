@@ -80,8 +80,16 @@ def eventos_json(request):
 def criar_evento(request):
     criador=request.user
     paciente_id = request.POST['cliente']
-    paciente = User.objects.get(id=paciente_id)
-    title = request.POST['title']
+    if paciente_id == '':
+        paciente = None
+    else:
+        paciente = User.objects.get(id=paciente_id)
+
+    if paciente == None:
+        nomenotitle = 'Disponivel'
+    else:
+        nomenotitle = paciente.first_name
+    title = f"{request.POST['title']} - Paciente: {nomenotitle} - Descrição: {request.POST['description']} "
     description = request.POST['description']
     start = datetime.strptime(request.POST['inicio'], '%Y-%m-%dT%H:%M')
     end = start + timedelta(hours=1)
@@ -93,4 +101,4 @@ def criar_evento(request):
 def get_clientes(request):
     clientes = User.objects.filter(user_permissions__codename='cliente')
     permissions = Permission.objects.filter(codename='cliente')
-    return ({'clientes': clientes, 'permissions': permissions})
+    return JsonResponse({'clientes': list(clientes.values()), 'permissions': list(permissions.values())})
