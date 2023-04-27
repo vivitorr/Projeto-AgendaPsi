@@ -2,24 +2,33 @@ document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
+    themeSystem: 'bootstrap5',
+    initialView: 'listWeek',
     timeZone: 'America/Sao_Paulo',
     locale: 'pt-br',
     selectable: true,
-    
 
     headerToolbar:{
-      start: 'dayGridMonth listWeek',
+      start: 'listWeek,dayGridMonth myCustomButton',
       center: 'title',
       end: 'prev today next'
     },
 
+    customButtons: {
+      myCustomButton: {
+        text: 'Adicionar Horário',
+        click: function() {
+          document.getElementById("modal-criar-evento").style.display = "block";
+        }
+      }
+    },
+
     buttonText:{
-      today:    'hoje',
-      month:    'mês',
+      today:    'Hoje',
+      month:    'Calenario',
       week:     'semana',
       day:      'dia',
-      list:     'lista'
+      list:     'Agenda'
     },
 
     dateClick: function(info) {
@@ -36,8 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.getElementById("adicionar-evento").addEventListener("click", function() {
   document.getElementById("modal-criar-evento").style.display = "block";
-  
-  // aqui você pode adicionar o código para abrir o modal/formulário de criação de evento
 });
 
 document.getElementById("fechar-modal").addEventListener("click", function() {

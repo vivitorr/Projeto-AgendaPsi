@@ -49,13 +49,13 @@ h3{
     border-radius: 8px;
     border: 2px solid #732cd1;
     background-color: #ffffff;
-    transition: 1s;
+    transition: 0.5s;
 }
 
 .btn:hover{
     border: 2px solid #000000;
     background-color: #732cd1;
-    transition: 1s;
+    transition: 0.5s;
 }
 
 img{
@@ -76,16 +76,44 @@ img{
     z-index: 1;
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0,0,0,0.4);
   }
   
   .modal-content {
-    background-color: #fefefe;
-    margin: 10% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    padding: 50px 40px 70px;
+    margin: 15% auto;
+    width: 25%;
   }
+
+.form-evento{
+    display: grid;
+    justify-content: center;
+    gap: 30px;
+}
+
+input{
+    background-color: #00000000;
+    border-color: #00000018;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 350px;
+    height: 28px;
+    padding: 13px 15px;
+}
+
+.botoes{
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.botao-calendario{
+    display: none;
+}

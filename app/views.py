@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission
 from django.contrib.auth.decorators import permission_required, login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -56,7 +56,9 @@ def home_cliente(request):
 @login_required(login_url='/')
 @permission_required('admin.psico', login_url='/')
 def home_psico(request):
-    return render(request, 'home/home_psico.html')  
+    clientes = User.objects.filter(user_permissions__codename='cliente')
+    permissions = Permission.objects.filter(codename='cliente')
+    return render(request, 'home/home_psico.html', {'clientes': clientes, 'permissions': permissions})
 
 def sair(request):
     logout(request)
@@ -79,11 +81,14 @@ def eventos_json(request):
 
 def criar_evento(request):
     criador=request.user
+    paciente_id = request.POST['cliente']
+    paciente = User.objects.get(id=paciente_id)
     title = request.POST['title']
     description = request.POST['description']
     start = datetime.strptime(request.POST['inicio'], '%Y-%m-%dT%H:%M')
     end = start + timedelta(hours=1)
     end = end.strftime('%Y-%m-%d %H:%M:%S')
-    evento = Events(criador=criador, title=title, description=description, start=start, end = end)
+    evento = Events(criador=criador, paciente=paciente, title=title, description=description, start=start, end = end)
     evento.save()
     return render(request, 'home\home_psico.html') 
+

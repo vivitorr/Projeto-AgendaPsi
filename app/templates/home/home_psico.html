@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
     <link rel="stylesheet" href= "{% static 'css/home/home_psico.css' %}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,17 +33,27 @@
             <button id="adicionar-evento" class="botao-calendario"><i class="fas fa-plus"></i> Adicionar Evento</button>
         </div>
         
-        
         <div id="modal-criar-evento" class="modal">
             <div class="modal-content">
-              <h2>Criar Evento</h2>
-              <form class="form" name="form-evento" id="formEvento" method="post" action="/criar_evento/">
+
+                    <h2>Adicionar Horario</h2>
+
+              <form class="form-evento" name="form-evento" id="formEvento" method="post" action="/criar_evento/">
                 {% csrf_token %}
                 <input type="text" id="title" name="title" placeholder="Titulo">
+                <label for="cliente">Cliente:</label>
+                    <select name="cliente" id="cliente">
+                        <option value="disponivel">Disponivel</option>
+                        {% for cliente in clientes %}
+                            <option value="{{ cliente.id }}">{{ cliente.first_name }}</option>
+                        {% endfor %}
+                    </select>
                 <input type="text" id="description" name="description" placeholder="Descrição">
                 <input type="datetime-local" id="inicio" name="inicio" placeholder="dd-MM-dd HH:mm:ss" size="16" ng-model="data.action.date"/>
-                <button class="btn btn-criar" id="criar-evento">Criar Evento</button>
-                <button id="fechar-modal">Fechar</button>
+                <div class="botoes" >
+                    <button class="btn btn-fechar" id="fechar-modal">Cancelar</button>
+                    <button class="btn btn-criar" id="criar-evento">Adicionar</button>
+                </div>
               </form>
             </div>
         </div>
