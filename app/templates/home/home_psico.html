@@ -35,24 +35,43 @@
         
         <div id="modal-criar-evento" class="modal">
             <div class="modal-content">
-
-                    <h2>Adicionar Horario</h2>
-
-              <form class="form-evento" name="form-evento" id="formEvento" method="post" action="/criar_evento/">
-                {% csrf_token %}
-                <input type="text" id="title" name="title" placeholder="Titulo">
-                <div class="paci">
-                    <label for="cliente">Paciente</label>
-                    <select name="cliente" id="cliente">
-                    </select>
-                </div>
-                <input type="text" id="description" name="description" placeholder="Descrição">
-                <input type="datetime-local" id="inicio" name="inicio" placeholder="dd-MM-dd HH:mm:ss" size="16" ng-model="data.action.date"/>
-                <button class="btn btn-criar" id="criar-evento">Adicionar</button>
-                <button class="btn btn-fechar" id="fechar-modal">Cancelar</button>
-              </form>
+                <h2>Adicionar Horario</h2>
+                <form class="form-evento" name="form-evento" id="formEvento" method="post" action="/criar_evento/">
+                    {% csrf_token %}
+                    <input type="text" id="title" name="title" value="Titulo">
+                    <div class="paci">
+                        <label for="cliente">Paciente</label>
+                        <select name="cliente" id="cliente">
+                        </select>
+                    </div>
+                    <input type="text" id="description" name="description" placeholder="Descrição">
+                    <input type="datetime-local" id="inicio" name="inicio" placeholder="dd-MM-dd HH:mm:ss" size="16" ng-model="data.action.date"/>
+                    <button class="btn btn-criar" id="criar-evento">Adicionar</button>
+                    <button class="btn btn-fechar" id="fechar-modal">Cancelar</button>
+                </form>
             </div>
-        </div>  
+        </div>
+
+        <div id="modal-editar-evento" class="modal">
+            <div class="modal-content">
+                <h2>Editar</h2>
+                <form class="form-evento" name="form-evento" id="formEvento" method="post" action="/criar_evento/">
+                    {% csrf_token %}
+                    <input type="text" id="title-editar" name="title" value="Titulo">
+                    <div class="paci">
+                        <label for="cliente">Paciente</label>
+                        <select name="cliente" id="cliente">
+                        </select>
+                    </div>
+                    <input type="text" id="description-editar" name="description" placeholder="Descrição">
+                    <input type="datetime-local" id="inicio" name="inicio" placeholder="dd-MM-dd HH:mm:ss" size="16" ng-model="data.action.date"/>
+                    <button class="btn btn-criar" id="criar-evento">Adicionar</button>
+                    <button class="btn btn-fechar" id="fechar-modal">Cancelar</button>
+                    <button id="deletar-evento">Deletar</button>
+                    <input type="hidden" id="evento-id" name="evento_id" value="{{ evento.id }}">
+                </form>
+            </div>
+        </div>
     </div>
     <script src="{% static 'js/home/home_psico.js' %}"></script>  
 </body>

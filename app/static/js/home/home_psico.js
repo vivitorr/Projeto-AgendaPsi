@@ -1,4 +1,3 @@
-var eventoSelecionadoTitulo;
 document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
 
@@ -56,6 +55,16 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     },
 
+    eventClick: function(info) {
+      var evento_id = info.event.id;
+      $.ajax({
+          url: '/eventos/' + evento_id + '/',
+          success: function(response) {
+              $('#modal-editar-evento').html(response).show();
+          }
+      });
+  }
+
   });
   calendar.render();
 });
@@ -71,5 +80,12 @@ document.getElementById("fechar-modal").addEventListener("click", function() {
 document.getElementById("modal-criar-evento").addEventListener("click", function(event) {
   if (event.target == document.getElementById("modal-criar-evento")) {
     document.getElementById("modal-criar-evento").style.display = "none";
+  }
+});
+
+
+document.getElementById("modal-editar-evento").addEventListener("click", function(event) {
+  if (event.target == document.getElementById("modal-editar-evento")) {
+    document.getElementById("modal-editar-evento").style.display = "none";
   }
 });

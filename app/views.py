@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseNotFound
 from django.contrib.auth.models import User, Permission
 from django.contrib.auth.decorators import permission_required, login_required
@@ -103,3 +103,12 @@ def get_clientes(request):
     clientes = User.objects.filter(user_permissions__codename='cliente')
     permissions = Permission.objects.filter(codename='cliente')
     return JsonResponse({'clientes': list(clientes.values()), 'permissions': list(permissions.values())})
+
+def evento_por_id(request, evento_id):
+    evento = get_object_or_404(Events, id=evento_id)
+    return (request, {'evento': evento})
+
+def deletar_evento(request, evento_id):
+    evento = get_object_or_404(Events, pk=evento_id)
+    evento.delete()
+    return redirect('home_psico')
