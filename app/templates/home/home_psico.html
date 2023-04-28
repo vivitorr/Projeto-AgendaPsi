@@ -52,6 +52,34 @@
             </div>
         </div>
 
+        <div id="modal-evento" class="modal">
+            <div class="modal-content">
+                <h2>Evento</h2>
+                <form class="form-evento" name="formEditarEvento" id="formEditarEvento" method="post" action="/criar_evento/" >
+                    <input type="hidden" id="idEvento" name="idEvento" value="">
+                    <div class="input-field">
+                        <input type="text" id="tituloEvento" name="tituloEvento" placeholder="Título">
+                    </div>
+                    <div class="input-field">
+                        <input type="text" id="descricaoEvento" name="descricaoEvento" placeholder="Descrição">
+                    </div>
+                    <div class="input-field">
+                        <input type="text" id="pacienteEvento" name="pacienteEvento" placeholder="Paciente">
+                    </div>
+                    <div class="input-field">
+                        <input type="text" id="dataInicioEvento" name="dataInicioEvento" placeholder="Data de início">
+                    </div>
+                    <div class="input-field">
+                        <input type="text" id="dataFimEvento" name="dataFimEvento" placeholder="Data de término">
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn red" id="excluirEvento">Excluir</button>
+                        <button class="btn" id="atualizarEvento">Editar</button>
+                        <button class="btn" id="fecharModalEvento">Fechar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
     </div>
     <script src="{% static 'js/home/home_psico.js' %}"></script>  

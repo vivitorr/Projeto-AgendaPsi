@@ -55,7 +55,35 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     },
 
-
+    eventClick: function(info) {
+      var evento = info.event;
+      var idEvento = evento.id;
+  
+      // Preencher os campos do modal com as informações do evento clicado
+      document.getElementById('idEvento').value = idEvento;
+      document.getElementById('tituloEvento').value = evento.title;
+      document.getElementById('descricaoEvento').value = evento.extendedProps.descricao;
+      document.getElementById('pacienteEvento').value = evento.extendedProps.paciente;
+      document.getElementById('dataInicioEvento').value = moment(evento.start).format('DD/MM/YYYY HH:mm:ss');
+      document.getElementById('dataFimEvento').value = moment(evento.end).format('DD/MM/YYYY HH:mm:ss');
+  
+      // Exibir a modal
+      document.getElementById('modal-evento').style.display = 'block';
+  
+      // Adicionar evento de clique no botão "Editar"
+      document.getElementById('atualizarEvento').addEventListener('click', function(event) {
+          event.preventDefault();
+          // Chamar função para atualizar o evento
+          atualizarEvento(idEvento);
+      });
+  
+      // Adicionar evento de clique no botão "Excluir"
+      document.getElementById('excluirEvento').addEventListener('click', function(event) {
+          event.preventDefault();
+          // Chamar função para excluir o evento
+          excluirEvento(idEvento);
+      });
+  },
 
   });
   calendar.render();
@@ -81,3 +109,11 @@ document.getElementById("modal-editar-evento").addEventListener("click", functio
     document.getElementById("modal-editar-evento").style.display = "none";
   }
 });
+
+function atualizarEvento(idEvento) {
+  // TODO: Implementar função para atualizar evento
+}
+
+function excluirEvento(idEvento) {
+  // TODO: Implementar função para excluir evento
+}
