@@ -1,3 +1,4 @@
+var eventoSelecionadoTitulo;
 document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
 
@@ -7,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     timeZone: 'America/Sao_Paulo',
     locale: 'pt-br',
     selectable: true,
-    displayEventEnd: true,
+    events: eventosJsonUrl,
 
     headerToolbar:{
       start: 'listWeek,dayGridMonth myCustomButton',
@@ -54,8 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
         calendar.changeView('timeGrid', info.dateStr);
       }
     },
-
-    events: eventosJsonUrl
 
   });
   calendar.render();
