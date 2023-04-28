@@ -55,15 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     },
 
-    eventClick: function(info) {
-      var evento_id = info.event.id;
-      $.ajax({
-          url: '/eventos/' + evento_id + '/',
-          success: function(response) {
-              $('#modal-editar-evento').html(response).show();
-          }
-      });
-  }
+
 
   });
   calendar.render();
