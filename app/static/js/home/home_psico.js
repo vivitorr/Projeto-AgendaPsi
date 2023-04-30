@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var calendar = new FullCalendar.Calendar(calendarEl, {
     themeSystem: 'bootstrap5',
     initialView: 'listWeek',
-    timeZone: 'America/Sao_Paulo',
+    timeZone: 'UTC',
     locale: 'pt-br',
     selectable: true,
     events: eventosJsonUrl,
@@ -58,35 +58,25 @@ document.addEventListener('DOMContentLoaded', function() {
     eventClick: function(info) {
       var evento = info.event;
       var idEvento = evento.id;
-  
-      // Preencher os campos do modal com as informações do evento clicado
-      document.getElementById('idEvento').value = idEvento;
-      document.getElementById('tituloEvento').value = evento.title;
-      document.getElementById('descricaoEvento').value = evento.extendedProps.descricao;
-      document.getElementById('pacienteEvento').value = evento.extendedProps.paciente;
-      document.getElementById('dataInicioEvento').value = moment(evento.start).format('DD/MM/YYYY HH:mm:ss');
-      document.getElementById('dataFimEvento').value = moment(evento.end).format('DD/MM/YYYY HH:mm:ss');
-  
+      console.log(idEvento)
+      
       // Exibir a modal
       document.getElementById('modal-evento').style.display = 'block';
+
+      // Preencher os campos do modal com as informações do evento clicado
+      document.getElementById('tituloEvento').innerHTML = evento.title;
+      document.getElementById('pacienteEvento').innerHTML = evento.groupId;
+      document.getElementById('descricaoEvento').innerHTML = evento.extendedProps.descricao;
+      document.getElementById('dataInicioEvento').innerHTML = evento.start.toLocaleDateString('pt-BR', {timeZone: 'UTC'}) + ' ' + evento.start.toLocaleTimeString('pt-BR', 
+      {timeZone: 'UTC'});
+      document.getElementById('idEvento').value = idEvento;
   
-      // Adicionar evento de clique no botão "Editar"
-      document.getElementById('atualizarEvento').addEventListener('click', function(event) {
-          event.preventDefault();
-          // Chamar função para atualizar o evento
-          atualizarEvento(idEvento);
-      });
   
-      // Adicionar evento de clique no botão "Excluir"
-      document.getElementById('excluirEvento').addEventListener('click', function(event) {
-          event.preventDefault();
-          // Chamar função para excluir o evento
-          excluirEvento(idEvento);
-      });
   },
 
   });
   calendar.render();
+
 });
 
 document.getElementById("adicionar-evento").addEventListener("click", function() {
@@ -104,16 +94,13 @@ document.getElementById("modal-criar-evento").addEventListener("click", function
 });
 
 
-document.getElementById("modal-editar-evento").addEventListener("click", function(event) {
-  if (event.target == document.getElementById("modal-editar-evento")) {
-    document.getElementById("modal-editar-evento").style.display = "none";
-  }
+
+document.getElementById("fecharModalEvento").addEventListener("click", function() {
+  document.getElementById("modal-evento").style.display = "none";
 });
 
-function atualizarEvento(idEvento) {
-  // TODO: Implementar função para atualizar evento
-}
-
-function excluirEvento(idEvento) {
-  // TODO: Implementar função para excluir evento
-}
+document.getElementById("modal-evento").addEventListener("click", function(event) {
+  if (event.target == document.getElementById("modal-evento")) {
+    document.getElementById("modal-evento").style.display = "none";
+  }
+});

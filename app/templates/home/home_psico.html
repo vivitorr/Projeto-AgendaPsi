@@ -38,14 +38,14 @@
                 <h2>Adicionar Horario</h2>
                 <form class="form-evento" name="form-evento" id="formEvento" method="post" action="/criar_evento/">
                     {% csrf_token %}
-                    <input type="text" id="title" name="title" value="Titulo">
+                    <input type="text" id="title" name="title" placeholder="Titulo">
                     <div class="paci">
                         <label for="cliente">Paciente</label>
                         <select name="cliente" id="cliente">
                         </select>
                     </div>
                     <input type="text" id="description" name="description" placeholder="Descrição">
-                    <input type="datetime-local" id="inicio" name="inicio" placeholder="dd-MM-dd HH:mm:ss" size="16" ng-model="data.action.date"/>
+                    <input type="datetime-local" id="inicio" name="inicio" />
                     <button class="btn btn-criar" id="criar-evento">Adicionar</button>
                     <button class="btn btn-fechar" id="fechar-modal">Cancelar</button>
                 </form>
@@ -54,30 +54,20 @@
 
         <div id="modal-evento" class="modal">
             <div class="modal-content">
-                <h2>Evento</h2>
-                <form class="form-evento" name="formEditarEvento" id="formEditarEvento" method="post" action="/criar_evento/" >
-                    <input type="hidden" id="idEvento" name="idEvento" value="">
-                    <div class="input-field">
-                        <input type="text" id="tituloEvento" name="tituloEvento" placeholder="Título">
-                    </div>
-                    <div class="input-field">
-                        <input type="text" id="descricaoEvento" name="descricaoEvento" placeholder="Descrição">
-                    </div>
-                    <div class="input-field">
-                        <input type="text" id="pacienteEvento" name="pacienteEvento" placeholder="Paciente">
-                    </div>
-                    <div class="input-field">
-                        <input type="text" id="dataInicioEvento" name="dataInicioEvento" placeholder="Data de início">
-                    </div>
-                    <div class="input-field">
-                        <input type="text" id="dataFimEvento" name="dataFimEvento" placeholder="Data de término">
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn red" id="excluirEvento">Excluir</button>
-                        <button class="btn" id="atualizarEvento">Editar</button>
-                        <button class="btn" id="fecharModalEvento">Fechar</button>
-                    </div>
-                </form>
+                <h2><span id="tituloEvento"></span></h2>
+                <div>
+                    <p>Nome do Paciente: <span id="pacienteEvento"></span></p>
+                    <p>Detalhes: <span id="descricaoEvento"></span></p>
+                    <p>Data e Hora: <span id="dataInicioEvento"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-fechar" id="fecharModalEvento">Fechar</button>
+                    <form class="form-evento" method="post" name="ex-evento" id="exEvento" action="/excluir_evento/" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" id="idEvento" name="idEvento" value="">
+                        <button class="btn btn-ex" id="ex-evento">excluir</button>
+                    </form>
+                </div>   
             </div>
         </div>
 

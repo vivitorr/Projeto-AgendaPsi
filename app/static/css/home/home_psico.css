@@ -82,7 +82,6 @@ img{
   }
   
   .modal-content {
-    text-align: center;
     background: #fff;
     border: 1px solid #dadce0;
     border-radius: 8px;
@@ -146,4 +145,12 @@ label {
     display: none;
 }
 
+.modal-footer{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row-reverse;
+}
 
+.btn.btn-fechar{
+    display: none;
+}

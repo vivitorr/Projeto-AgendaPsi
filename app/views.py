@@ -9,6 +9,8 @@ import json
 from django.http import JsonResponse
 from django.contrib import auth
 from datetime import datetime, timedelta
+from django.views.decorators.http import require_POST
+
 # Create your views here.
 
 
@@ -70,8 +72,9 @@ def eventos_json(request):
         evento_json = {
             'id': evento.id,
             'title': evento.title,
-            'start': evento.start.strftime('%Y-%m-%dT%H:%M:%S'),
-            'end': evento.end.strftime('%Y-%m-%dT%H:%M:%S'),
+            'groupId': str(evento.paciente),
+            'start': evento.start.strftime('%Y-%m-%dT%H:%M'),
+            'end': evento.end.strftime('%Y-%m-%dT%H:%M'),
             'descricao': evento.description,
         }
         eventos_json.append(evento_json)
@@ -81,6 +84,7 @@ def eventos_json(request):
 def criar_evento(request):
     criador=request.user
     paciente_id = request.POST['cliente']
+    #nome_paciente = User.objects.get(user.first_name)
     if paciente_id == '':
         paciente = None
     else:
@@ -90,11 +94,11 @@ def criar_evento(request):
         nomenotitle = 'Disponivel'
     else:
         nomenotitle = paciente.first_name
-    title = f"{request.POST['title']} - Paciente: {nomenotitle} - Descrição: {request.POST['description']} "
+    title = request.POST['title']
     description = request.POST['description']
     start = datetime.strptime(request.POST['inicio'], '%Y-%m-%dT%H:%M')
     end = start + timedelta(hours=1)
-    end = end.strftime('%Y-%m-%d %H:%M:%S')
+    end = end.strftime('%Y-%m-%dT%H:%M')
     evento = Events(criador=criador, paciente=paciente, title=title, description=description, start=start, end = end)
     evento.save()
     return redirect('home_psico')
@@ -104,3 +108,12 @@ def get_clientes(request):
     permissions = Permission.objects.filter(codename='cliente')
     return JsonResponse({'clientes': list(clientes.values()), 'permissions': list(permissions.values())})
 
+def excluir_evento(request):
+    idev = request.POST['idEvento']
+    if idev == '':
+        return JsonResponse({'success': False, 'error': 'Evento não encontrado.'})
+    else:
+        evento = Events.objects.get(id=idev)
+        evento.delete()
+        return redirect('home_psico')
+    
