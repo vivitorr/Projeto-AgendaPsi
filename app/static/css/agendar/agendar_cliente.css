@@ -28,6 +28,12 @@ body{
     flex-direction: column;
     gap: 30px;
 }
+
+.calendar{
+    width: 70%;
+    
+    height: 70vh;
+}
 /*____________________________________________________*/
 
 /*_______________________titles_______________________*/
@@ -47,30 +53,6 @@ h3{
     align-items: center;
     width: 80px;
     height: 40px;
-    border-radius: 8px;
-    border: 2px solid #732cd1;
-    background-color: #ffffff;
-    transition: 0.5s;
-}
-
-.btn.btn-agendamento{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 100px;
-    border-radius: 8px;
-    border: 2px solid #732cd1;
-    background-color: #ffffff;
-    transition: 0.5s;
-}
-
-.btn.btn-consultar{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 100px;
     border-radius: 8px;
     border: 2px solid #732cd1;
     background-color: #ffffff;

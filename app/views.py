@@ -80,7 +80,6 @@ def eventos_json(request):
         eventos_json.append(evento_json)
     return JsonResponse(eventos_json, safe=False)
 
-
 def criar_evento(request):
     criador=request.user
     paciente_id = request.POST['cliente']
@@ -108,6 +107,11 @@ def get_clientes(request):
     permissions = Permission.objects.filter(codename='cliente')
     return JsonResponse({'clientes': list(clientes.values()), 'permissions': list(permissions.values())})
 
+def get_psicos(request):
+    psicos = User.objects.filter(user_permissions__codename='psico')
+    permissions = Permission.objects.filter(codename='psico')
+    return JsonResponse({'psicos': list(psicos.values()), 'permissions': list(permissions.values())})
+
 def excluir_evento(request):
     idev = request.POST['idEvento']
     if idev == '':
@@ -117,3 +121,26 @@ def excluir_evento(request):
         evento.delete()
         return redirect('home_psico')
     
+def agendar_cliente_load(request):
+    eventos = Events.objects.all()
+    eventos = eventos.filter(paciente=None)
+    eventos = eventos.filter(criador=request.POST['psico'])
+    eventos_cliente = []
+    for evento in eventos:
+        evento_json = {
+            'id': evento.id,
+            'title': evento.title,
+            'groupId': str(evento.paciente),
+            'start': evento.start.strftime('%Y-%m-%dT%H:%M'),
+            'end': evento.end.strftime('%Y-%m-%dT%H:%M'),
+            'descricao': evento.description,
+        }
+        eventos_cliente.append(evento_json)
+    eventos_cliente_json = json.dumps(eventos_cliente)
+    context = {
+        'eventos_cliente_json': eventos_cliente_json,
+    }
+    return render(request, 'agendar/agendar_cliente.html',context)
+
+def agendar_cliente(request):
+    return render(request, 'agendar/agendar_cliente.html')

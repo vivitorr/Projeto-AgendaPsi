@@ -62,7 +62,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-fechar" id="fecharModalEvento">Fechar</button>
-                    <form class="form-evento" method="post" name="ex-evento" id="exEvento" action="/excluir_evento/" method="post">
+                    <form class="form-evento" method="post" name="ex-evento" id="exEvento" action="/excluir_evento/" >
                         {% csrf_token %}
                         <input type="hidden" id="idEvento" name="idEvento" value="">
                         <button class="btn btn-ex" id="ex-evento">excluir</button>

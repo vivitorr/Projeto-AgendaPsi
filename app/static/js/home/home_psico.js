@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var calendar = new FullCalendar.Calendar(calendarEl, {
     themeSystem: 'bootstrap5',
     initialView: 'listWeek',
-    timeZone: 'UTC',
+    timeZone: 'America/Sao_Paulo',
     locale: 'pt-br',
     selectable: true,
     events: eventosJsonUrl,
@@ -104,3 +104,4 @@ document.getElementById("modal-evento").addEventListener("click", function(event
     document.getElementById("modal-evento").style.display = "none";
   }
 });
+
