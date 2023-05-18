@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     buttonText:{
       today:    'Hoje',
-      month:    'Calenario',
+      month:    'Calendario',
       week:     'semana',
       day:      'dia',
       list:     'Agenda'
@@ -58,33 +58,46 @@ document.addEventListener('DOMContentLoaded', function() {
     eventClick: function(info) {
       var evento = info.event;
       var idEvento = evento.id;
-      console.log(idEvento)
       
       // Exibir a modal
       document.getElementById('modal-evento').style.display = 'block';
 
       // Preencher os campos do modal com as informações do evento clicado
       document.getElementById('tituloEvento').innerHTML = evento.title;
-      document.getElementById('pacienteEvento').innerHTML = evento.groupId;
-      document.getElementById('descricaoEvento').innerHTML = evento.extendedProps.descricao;
+      document.getElementById('pacienteEvento').innerHTML = evento.extendedProps.paciente === 'None' ? 'Disponível' : evento.extendedProps.paciente;
+      document.getElementById('descricaoEvento').innerHTML = evento.extendedProps.descricao ? evento.extendedProps.descricao : 'Sem descrição';
       document.getElementById('dataInicioEvento').innerHTML = evento.start.toLocaleDateString('pt-BR', {timeZone: 'UTC'}) + ' ' + evento.start.toLocaleTimeString('pt-BR', 
       {timeZone: 'UTC'});
       document.getElementById('idEvento').value = idEvento;
-  
-  
+
+
+      fetch('/get_clientes/')
+      .then(response => response.json())
+      .then(data => {
+          const select = document.getElementById('editar-cliente');
+          select.innerHTML = '<option value="">Disponível</option>';
+          data.clientes.forEach(cliente => {
+              const option = document.createElement('option');
+              option.text = cliente.first_name;
+              option.value = cliente.id;
+
+              if (evento.extendedProps.paciente === cliente.first_name.toString()) {
+                option.selected = true;
+              }
+              select.add(option);
+          });
+      });
+
+      document.getElementById('editar-title').value = evento.title;
+      document.getElementById('editar-description').value = evento.extendedProps.descricao ? evento.extendedProps.descricao : 'Sem descrição';
+      const formattedDateTime = evento.start.toISOString().slice(0, 16);
+      document.getElementById('editar-inicio').value = formattedDateTime
+      document.getElementById('idEditar').value = idEvento;
   },
 
   });
   calendar.render();
 
-});
-
-document.getElementById("adicionar-evento").addEventListener("click", function() {
-  document.getElementById("modal-criar-evento").style.display = "block";
-});
-
-document.getElementById("fechar-modal").addEventListener("click", function() {
-  document.getElementById("modal-criar-evento").style.display = "none";
 });
 
 document.getElementById("modal-criar-evento").addEventListener("click", function(event) {
@@ -93,15 +106,19 @@ document.getElementById("modal-criar-evento").addEventListener("click", function
   }
 });
 
-
-
-document.getElementById("fecharModalEvento").addEventListener("click", function() {
-  document.getElementById("modal-evento").style.display = "none";
-});
-
 document.getElementById("modal-evento").addEventListener("click", function(event) {
   if (event.target == document.getElementById("modal-evento")) {
     document.getElementById("modal-evento").style.display = "none";
   }
 });
 
+
+document.getElementById("editar-evento").addEventListener("click", function() {
+  document.getElementById("modal-editar-evento").style.display = "block";
+});
+
+document.getElementById("modal-editar-evento").addEventListener("click", function(event) {
+  if (event.target == document.getElementById("modal-editar-evento")) {
+    document.getElementById("modal-editar-evento").style.display = "none";
+  }
+});

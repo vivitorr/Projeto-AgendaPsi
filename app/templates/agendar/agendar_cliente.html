@@ -15,19 +15,36 @@
 
     <script src="{% static 'fullcalendar/index.global.min.js' %}"></script> 
 </head>
-
-<body>
-
+    <script>
+       var eventosDataEl = '{{ eventos_cliente_json|safe }}';
+       var eventosData = JSON.parse(eventosDataEl);
+    </script>
+<body>  
     <div class="home">
         <div class="cabeca">
             <h3>AgendaPsi</h3>
             <div class="btns" >
+                <a href="/home_cliente/"><button class="btn btn-voltar"><img src="{% static 'img/voltar.png' %}"></button></a>
                 <button class="btn btn-conf" ><img src="{% static 'img/conf.png' %}"></button>
                 <a href="/sair/"><button class="btn btn-sair"><img src="{% static 'img/sair.png' %}"></button></a>
             </div>
         </div>
 
         <div id="calendar" class='calendar'>
+        </div>
+    </div>
+    <div id="modal-evento" class="modal">
+        <div class="modal-content">
+            <h2><span id="tituloEvento"></span></h2>
+            <div class="pa">
+                <p>Psicologo(a): <span id="criadorEvento"></span></p>
+                <p>Data e Hora: <span id="dataInicioEvento"></span></p>
+            </div>
+            <form class="form-marcar" method="post" name="ex-evento" id="exEvento" action="/marcar_evento/" >
+                {% csrf_token %}
+                <input type="hidden" id="idEvento" name="idEvento" value="">
+                <button class="btn btn-marcar" id="ex-evento">Marcar</button>
+            </form>
         </div>
     </div>
     <script src="{% static 'js/agendar/agendar_cliente.js' %}"></script>  

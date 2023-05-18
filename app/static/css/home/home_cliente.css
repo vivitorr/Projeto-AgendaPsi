@@ -23,70 +23,76 @@ body{
     align-items: center;
 }
 
-.content{
+.agendamentos{
+    width: 100vw;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     gap: 30px;
 }
 /*____________________________________________________*/
 
 /*_______________________titles_______________________*/
 h3{
-    color: #732cd1;
+    color: rgb(26 115 232);
     font-size: 24px;
     margin: 0;
     font-family: "Google Sans","Noto Sans Myanmar UI",arial,sans-serif;
     font-weight: 600;
 }
+h2{
+    display: flex;
+    justify-content: center;
+    color: rgb(26 115 232);
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-family: "Google Sans","Noto Sans Myanmar UI",arial,sans-serif;
+    font-weight: 700;
+}
+h1{
+    color: rgb(26 115 232);
+    margin-bottom: 10px;
+    font-family: "Google Sans","Noto Sans Myanmar UI",arial,sans-serif;
+}
 /*____________________________________________________*/
 
 /*_______________________BOTÕES_______________________*/
+.btns{
+    display: flex;
+    gap: 10px;
+}
+
 .btn{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 80px;
     height: 40px;
-    border-radius: 8px;
-    border: 2px solid #732cd1;
-    background-color: #ffffff;
-    transition: 0.5s;
-}
-
-.btn.btn-agendamento{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 100px;
-    border-radius: 8px;
-    border: 2px solid #732cd1;
-    background-color: #ffffff;
-    transition: 0.5s;
-}
-
-.btn.btn-consultar{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 100px;
-    border-radius: 8px;
-    border: 2px solid #732cd1;
-    background-color: #ffffff;
+    border-radius: 6px;
+    border: 2px solid rgb(26 115 232);
+    background-color: rgb(255, 255, 255);
     transition: 0.5s;
 }
 
 .btn:hover{
-    border: 2px solid #000000;
-    background-color: #732cd1;
+    background-color: rgb(26 115 232);
     transition: 0.5s;
 }
 
 img{
     width: 30px;
 }
+/*______________________________________________*/
 
+
+.calendar{
+    width: 45%;
+    height: 70vh;
+}
+
+
+/*_______________________modal_______________________*/
 .modal {
     display: none;
     position: fixed;
@@ -96,13 +102,53 @@ img{
     width: 100vw;
     height: 100vh;
     background-color: rgba(0,0,0,0.4);
-  }
+}
   
-.modal-content {
+  .modal-content {
     background: #fff;
     border: 1px solid #dadce0;
     border-radius: 8px;
-    padding: 50px 40px 70px;
+    padding: 20px 40px 50px;
     margin: 12% auto;
     width: 25%;
-  }
+}
+/*___________________________________________________*/
+
+/*_______________________modal-escolher-psico_______________________*/
+input{
+    background-color: #00000000;
+    border-color: #00000018;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 350px;
+    height: 28px;
+    padding: 13px 15px;
+}
+
+.form-psico{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.paci{
+    height: 28px;
+    padding: 13px 15px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    font-size: 16px;
+}
+
+select{
+    width: 250px;
+    height: 30px;
+    border-radius: 4px;
+}
+
+.btn.btn-buscar{
+    width: 250px;
+    height: 30px;
+}
+/*__________________________________________________________________*/

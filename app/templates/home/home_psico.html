@@ -29,9 +29,7 @@
             </div>
         </div>
 
-        <div id="calendar" class='calendar'>
-            <button id="adicionar-evento" class="botao-calendario"><i class="fas fa-plus"></i> Adicionar Evento</button>
-        </div>
+        <div id="calendar" class='calendar'></div>
         
         <div id="modal-criar-evento" class="modal">
             <div class="modal-content">
@@ -47,7 +45,6 @@
                     <input type="text" id="description" name="description" placeholder="Descrição">
                     <input type="datetime-local" id="inicio" name="inicio" />
                     <button class="btn btn-criar" id="criar-evento">Adicionar</button>
-                    <button class="btn btn-fechar" id="fechar-modal">Cancelar</button>
                 </form>
             </div>
         </div>
@@ -55,19 +52,44 @@
         <div id="modal-evento" class="modal">
             <div class="modal-content">
                 <h2><span id="tituloEvento"></span></h2>
-                <div>
-                    <p>Nome do Paciente: <span id="pacienteEvento"></span></p>
-                    <p>Detalhes: <span id="descricaoEvento"></span></p>
+                <div class="pa">
+                    <p>Paciente: <span id="pacienteEvento"></span></p>
+                    <p>Descrição: <span id="descricaoEvento"></span></p>
                     <p>Data e Hora: <span id="dataInicioEvento"></span></p>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-fechar" id="fecharModalEvento">Fechar</button>
-                    <form class="form-evento" method="post" name="ex-evento" id="exEvento" action="/excluir_evento/" >
+                <div class="botoes-evento" >
+                    <form class="form-ex" method="post" name="ex-evento" id="exEvento" action="/excluir_evento/" >
                         {% csrf_token %}
                         <input type="hidden" id="idEvento" name="idEvento" value="">
-                        <button class="btn btn-ex" id="ex-evento">excluir</button>
+                        <button class="btn btn-ex" id="ex-evento">Cancelar</button>
                     </form>
-                </div>   
+                    <button class="btn btn-editar" id="editar-evento">Editar</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-editar-evento" class="modal">
+            <div class="modal-content">
+                <h2>Editar</h2>
+                <form class="form-editar" name="form-editar" id="formEditar" method="post" action="/editar_evento/">
+                    {% csrf_token %}
+                    <input type="hidden" id="idEditar" name="idEditar" value="">
+                    <label for="editar-title">Titulo:</label>
+                    <input type="text" id="editar-title" name="editar-title" value="">
+
+                    <label for="editar-cliente">Paciente:</label>
+                    <div class="paci">
+                        <select name="editar-cliente" id="editar-cliente">
+                        </select>
+                    </div>
+
+                    <label for="editar-description">Descrição:</label>
+                    <input type="text" id="editar-description" name="editar-description" placeholder="Descrição">
+
+                    <label for="datetime-local">Data e hora:</label>
+                    <input type="datetime-local" id="editar-inicio" name="editar-inicio" />
+                    <button class="btn btn-criar" id="editar-evento">Editar</button>
+                </form>
             </div>
         </div>
 

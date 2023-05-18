@@ -26,11 +26,20 @@ body{
 
 /*_______________________titles_______________________*/
 h3{
-    color: #732cd1;
+    color: rgb(26 115 232);
     font-size: 24px;
     margin: 0;
     font-family: "Google Sans","Noto Sans Myanmar UI",arial,sans-serif;
     font-weight: 600;
+}
+h2{
+    display: flex;
+    justify-content: center;
+    color: rgb(26 115 232);
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-family: "Google Sans","Noto Sans Myanmar UI",arial,sans-serif;
+    font-weight: 700;
 }
 /*____________________________________________________*/
 
@@ -46,15 +55,14 @@ h3{
     align-items: center;
     width: 80px;
     height: 40px;
-    border-radius: 8px;
-    border: 2px solid #732cd1;
-    background-color: #ffffff;
+    border-radius: 6px;
+    border: 2px solid rgb(26 115 232);
+    background-color: rgb(255, 255, 255);
     transition: 0.5s;
 }
 
 .btn:hover{
-    border: 2px solid #000000;
-    background-color: #732cd1;
+    background-color: rgb(26 115 232);
     transition: 0.5s;
 }
 
@@ -63,13 +71,13 @@ img{
 }
 /*______________________________________________*/
 
-
 .calendar{
     width: 70%;
     
     height: 70vh;
 }
 
+/*_______________________Moldal_______________________*/
 .modal {
     display: none;
     position: fixed;
@@ -81,19 +89,13 @@ img{
     background-color: rgba(0,0,0,0.4);
   }
   
-  .modal-content {
+.modal-content {
     background: #fff;
     border: 1px solid #dadce0;
     border-radius: 8px;
-    padding: 50px 40px 70px;
+    padding: 20px 40px 50px;
     margin: 12% auto;
     width: 25%;
-  }
-
-.form-evento{
-    display: grid;
-    justify-content: center;
-    gap: 30px;
 }
 
 input{
@@ -104,10 +106,6 @@ input{
     width: 350px;
     height: 28px;
     padding: 13px 15px;
-}
-
-.botao-calendario{
-    display: none;
 }
 
 .paci{
@@ -135,22 +133,69 @@ label {
     font-weight: 400;
 }
 
+/*____________________________________________________*/
+
+/*_______________________Moldal Criar Evento_______________________*/
+.form-evento{
+    display: grid;
+    justify-content: center;
+    gap: 30px;
+}
+
 .btn.btn-criar{
     height: 28px;
     width: auto;
     padding: 13px 15px;
 }
 
-.btn.btn-fechar{
-    display: none;
-}
+/*_________________________________________________________________*/
 
-.modal-footer{
+/*_______________________Moldal Evento_______________________*/
+.form-ex{
     display: flex;
-    justify-content: space-around;
-    flex-direction: row-reverse;
+    justify-content: center;
 }
 
-.btn.btn-fechar{
-    display: none;
+.btn.btn-ex{
+    height: 28px;
+    width: 120px;
+    padding: 13px 15px;
+    margin-top: 10px;
 }
+
+.btn.btn-editar{
+    height: 28px;
+    width: 120px;
+    padding: 13px 15px;
+    margin-top: 10px;
+}
+.pa{
+    display: flex;
+    flex-direction: column;
+    color: #000000;
+    font-size: 17px;
+    font-family: "Google Sans","Noto Sans Myanmar UI",arial,sans-serif;
+    font-weight: 400;
+    align-items: flex-start;
+    padding: 0px 70px 0px;
+}
+
+p{
+    margin: 10px;
+}
+
+.botoes-evento{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-evenly;
+}
+/*___________________________________________________________*/
+
+/*_______________________Moldal Editar Evento_______________________*/
+.form-editar{
+    display: grid;
+    justify-content: center;
+    gap: 10px;
+}
+/*__________________________________________________________________*/
