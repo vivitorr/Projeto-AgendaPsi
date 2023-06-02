@@ -59,52 +59,47 @@ def home_psico(request):
     return render(request, 'home/home_psico.html')
 
 def criar_evento(request):
-    criador=request.user
-    nomecriador=request.user.first_name
+    criador = request.user
+    nomecriador = request.user.first_name
     paciente_id = request.POST['cliente']
-    if paciente_id == '':
-        paciente = None
-        nomepaciente = None
-    else:
-        paciente = User.objects.get(id=paciente_id)
-        nomepaciente= paciente.first_name
-
+    paciente = User.objects.get(id=paciente_id) if paciente_id else None
+    nomepaciente = paciente.first_name if paciente else None
     title = request.POST['title']
     description = request.POST['description']
     start = datetime.strptime(request.POST['inicio'], '%Y-%m-%dT%H:%M')
     end = start + timedelta(hours=1)
     end = end.strftime('%Y-%m-%dT%H:%M')
-    evento = Events(criador=criador, nomecriador=nomecriador, nomepaciente=nomepaciente, paciente=paciente, title=title, description=description, start=start, end = end)
-    evento.save()
+    evento = Events.objects.create(
+        criador=criador,
+        nomecriador=nomecriador,
+        nomepaciente=nomepaciente,
+        paciente=paciente,
+        title=title,
+        description=description,
+        start=start,
+        end=end
+    )
     return redirect('home_psico')
 
 def editar_evento(request):
-    idev = request.POST['idEditar']
-    if idev == '':
-        return JsonResponse({'success': False, 'error': 'Evento não encontrado.'})
-    else:
-        evento = Events.objects.get(id=idev)
-        paciente_id = request.POST['editar-cliente']
-        if paciente_id == '':
-            paciente = None
-            nomepaciente = None
-        else:
-            paciente = User.objects.get(id=paciente_id)
-            nomepaciente = paciente.first_name
-        
-        title = request.POST['editar-title']
-        description = request.POST['editar-description']
-        start = datetime.strptime(request.POST['editar-inicio'], '%Y-%m-%dT%H:%M')
-        end = start + timedelta(hours=1)
-        end = end.strftime('%Y-%m-%dT%H:%M')
-        evento.paciente = paciente
-        evento.nomepaciente = nomepaciente
-        evento.title = title
-        evento.description = description
-        evento.start = start
-        evento.end = end
-        evento.save()
-        return redirect('home_psico')
+    evento = get_object_or_404(Events, id=request.POST['idEditar'])
+    paciente_id = request.POST['editar-cliente']
+    paciente = User.objects.get(id=paciente_id) if paciente_id else None
+    nomepaciente = paciente.first_name if paciente else None
+    title = request.POST['editar-title']
+    description = request.POST['editar-description']
+    start = datetime.strptime(request.POST['editar-inicio'], '%Y-%m-%dT%H:%M')
+    end = start + timedelta(hours=1)
+    end = end.strftime('%Y-%m-%dT%H:%M')
+    evento.paciente = paciente
+    evento.nomepaciente = nomepaciente
+    evento.title = title
+    evento.description = description
+    evento.start = start
+    evento.end = end
+    evento.save()
+    return redirect('home_psico')
+
 
 def excluir_evento(request):
     idev = request.POST['idEvento']

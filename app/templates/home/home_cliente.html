@@ -47,6 +47,25 @@
             </form>
         </div>
     </div>
+
+    <div id="modal-evento" class="modal">
+        <div class="modal-content">
+            <h2><span id="tituloEvento"></span></h2>
+            <div class="pa">
+                <p>Paciente: <span id="pacienteEvento"></span></p>
+                <p>Descrição: <span id="descricaoEvento"></span></p>
+                <p>Data e Hora: <span id="dataInicioEvento"></span></p>
+            </div>
+            <div class="botoes-evento" >
+                <form class="form-ex" method="post" name="ex-evento" id="exEvento" action="/excluir_evento/" >
+                    {% csrf_token %}
+                    <input type="hidden" id="idEvento" name="idEvento" value="">
+                    <button class="btn btn-ex" id="ex-evento">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script src="{% static 'js/home/home_cliente.js' %}"></script>  
 </body>
 </html>
