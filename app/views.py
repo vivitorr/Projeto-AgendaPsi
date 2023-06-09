@@ -4,7 +4,7 @@ from django.contrib.auth.models import User, Permission
 from django.contrib.auth.decorators import permission_required, login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Events
+from .models import Events, Notificacoes
 import json
 from django.http import JsonResponse
 from django.contrib import auth
@@ -58,6 +58,14 @@ def cadastrobanc(request):
 def home_psico(request):
     return render(request, 'home/home_psico.html')
 
+def criar_notificacao(mensagem, criou, recebeu, data):
+    if recebeu == None:
+        pass
+    else:
+        notificacao = Notificacoes(mensagem=mensagem, criou=criou, recebeu=recebeu, data=data)
+        notificacao.save()
+
+
 def criar_evento(request):
     criador = request.user
     nomecriador = request.user.first_name
@@ -79,6 +87,7 @@ def criar_evento(request):
         start=start,
         end=end
     )
+    criar_notificacao('Novo consulta', criador, paciente, start)
     return redirect('home_psico')
 
 def editar_evento(request):
@@ -98,18 +107,35 @@ def editar_evento(request):
     evento.start = start
     evento.end = end
     evento.save()
+    criador = request.user
+    criar_notificacao('Consulta Editada', criador, paciente, start)
     return redirect('home_psico')
-
 
 def excluir_evento(request):
     idev = request.POST['idEvento']
-    if idev == '':
-        return JsonResponse({'success': False, 'error': 'Evento não encontrado.'})
-    else:
+    if not request.user.is_authenticated:
+        return redirect('tela_login')
+    elif User.get_user_permissions(request.user, obj=None) == {'admin.psico'}:
+        # código para exclusão do evento
         evento = Events.objects.get(id=idev)
+        criador = evento.criador
+        paciente = evento.paciente
+        start = evento.start
         evento.delete()
+        criar_notificacao('Consulta desmarcada', criador, paciente, start)
         return redirect('home_psico')
-    
+    elif User.get_user_permissions(request.user, obj=None) == {'admin.cliente'}:
+        # código para exclusão do evento
+        evento = Events.objects.get(id=idev)
+        criador = evento.criador
+        paciente = evento.paciente
+        start = evento.start
+        evento.delete()
+        criar_notificacao('Consulta desmarcada', criador, paciente, start)
+        return redirect('home_cliente')
+    else:
+        return HttpResponse('Usuário sem permissão para acessar esta página')
+
 def eventos_json(request):
     eventos = Events.objects.all()
     eventos = eventos.filter(criador=request.user)
@@ -127,9 +153,35 @@ def eventos_json(request):
         eventos_json.append(evento_json)
     return JsonResponse(eventos_json, safe=False)
 
+def excluir_notificacoes(request):
+    data = json.loads(request.body)
+    idnoti = data['idnoti']
+    print(idnoti)
+    notificacao = Notificacoes.objects.get(id=idnoti)
+    notificacao.delete()
+
+    return JsonResponse({'status': 'success'})
+
+
+def get_notificacoes(request):
+    notificacoes = Notificacoes.objects.all()
+    notificacoes = Notificacoes.objects.filter(recebeu=request.user)
+    notificacoes_json = []
+    for notificacao in notificacoes:
+        notificacao_json = {
+            'id': notificacao.id,
+            'mensagem': notificacao.mensagem,
+            'criou': str(notificacao.criou),
+            'data': notificacao.data.strftime('%Y-%m-%d %H:%M:%S'),
+            'visualizado': notificacao.visualizado,
+        }
+        notificacoes_json.append(notificacao_json)
+    return JsonResponse(notificacoes_json, safe=False)
+
 def get_clientes(request):
     clientes = User.objects.filter(user_permissions__codename='cliente')
     return JsonResponse({'clientes': list(clientes.values())})
+
 #############################################################
 
 
@@ -162,7 +214,11 @@ def marcar_evento(request):
     evento.paciente = request.user
     evento.nomepaciente = request.user.first_name
     evento.save()
-    return redirect('agendar_cliente')
+    criador = request.user
+    recebeu = evento.criador
+    start = evento.start
+    criar_notificacao('Consulta Marcada', criador, recebeu, start)
+    return render(request, 'home/home_cliente.html' )
 
 def get_psicos(request):
     psicos = User.objects.filter(user_permissions__codename='psico')

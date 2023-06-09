@@ -199,3 +199,98 @@ p{
     gap: 10px;
 }
 /*__________________________________________________________________*/
+
+/*_______________________Moldal Noti_______________________*/
+
+.tela{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    gap: 25px;
+
+    position: relative;
+    width: 400px;
+    height: 700px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    border: 1px solid #dadce0;
+    padding: 20px;
+    margin: 5% 60%;
+    overflow-x: auto;
+}
+
+.notificacao{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 10px 20px;
+    gap: 10px;
+
+    width: 360px;
+
+    background: #D9D9D9;
+    border-radius: 8px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.tela-fechar{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 2px 0px;
+    gap: 180px;
+
+    width: 340px;
+    height: 25.88px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.btn.btn-fechar{
+    width: 21.88px;
+    height: 21.88px;
+
+    background: #0000003a;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.conteudo{
+    height: 17px;
+
+    font-weight: 400;
+
+    line-height: 17px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #000000;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+/*__________________________________________________________________*/

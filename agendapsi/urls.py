@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LoginView, LogoutView
-from app.views import tela_login, tela_cadastro, loginbanc, cadastrobanc, home_cliente, home_psico, sair, eventos_json, criar_evento, get_clientes, excluir_evento, agendar_cliente, get_psicos, agendar_cliente_load, marcar_evento, home_cliente_load, editar_evento
+from app.views import tela_login, tela_cadastro, loginbanc, cadastrobanc, home_cliente, home_psico, sair, eventos_json, criar_evento, get_clientes, excluir_evento, agendar_cliente, get_psicos, agendar_cliente_load, marcar_evento, home_cliente_load, editar_evento, criar_notificacao, get_notificacoes, excluir_notificacoes
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,4 +39,7 @@ urlpatterns = [
     path('agendar_cliente/', agendar_cliente, name='agendar_cliente'),
     path('agendar_cliente_load/', agendar_cliente_load, name='agendar_cliente_load'),
     path('home_cliente_load/', home_cliente_load, name='home_cliente_load'),
+    path('criar_notificacao/', criar_notificacao, name='criar_notificacao'),
+    path('get_notificacoes/', get_notificacoes, name='get_notificacoes'),
+    path('excluir_notificacoes/', excluir_notificacoes, name='excluir_notificacoes'),
 ]

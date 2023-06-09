@@ -24,7 +24,7 @@
         <div class="cabeca">
             <h3>AgendaPsi</h3>
             <div class="btns" >
-                <button class="btn btn-conf" ><img src="{% static 'img/conf.png' %}"></button>
+                <button id="noti" class="btn btn-noti" ><img src="{% static 'img/noti_com.png' %}"></button>
                 <a href="/sair/"><button class="btn btn-sair"><img src="{% static 'img/sair.png' %}"></button></a>
             </div>
         </div>
@@ -62,6 +62,18 @@
                     <input type="hidden" id="idEvento" name="idEvento" value="">
                     <button class="btn btn-ex" id="ex-evento">Cancelar</button>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-noti" class="modal">
+        <div id="tela-noti" class="tela">
+            <h2>Notificações</h2>     
+            <div id="notificacao" class="notificacao">
+                <div id="tela-fechar" class="tela-fechar">
+                    <button class="btn btn-fechar" id="fechar">x</button>
+                </div>
+                    <p class="conteudo" id="conteudo"></p>
             </div>
         </div>
     </div>
